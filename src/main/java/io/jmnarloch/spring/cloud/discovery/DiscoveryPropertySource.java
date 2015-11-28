@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,18 +32,38 @@ import java.util.List;
  */
 public class DiscoveryPropertySource extends PropertySource<DiscoveryClient> {
 
+    /**
+     * Logger instance used by this class.
+     */
     private final Logger logger = LoggerFactory.getLogger(DiscoveryPropertySource.class);
 
+    /**
+     * The default SPEL prefix.
+     */
     public static final String PREFIX = "discovery.";
 
+    /**
+     * Creates new instance of {@link DiscoveryPropertySource} with specific name.
+     *
+     * @param name the property source name
+     */
     public DiscoveryPropertySource(String name) {
         super(name, new DelegatingDiscoveryClient());
     }
 
+    /**
+     * Sets the application context.
+     *
+     * @param applicationContext the application context
+     * @throws BeansException if any error occurs
+     */
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         ((DelegatingDiscoveryClient) getSource()).setApplicationContext(applicationContext);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Object getProperty(String name) {
         if (!name.startsWith(PREFIX)) {
@@ -52,6 +72,12 @@ public class DiscoveryPropertySource extends PropertySource<DiscoveryClient> {
         return handleDiscoveryOperation(name.substring(PREFIX.length()));
     }
 
+    /**
+     * Processes the operation declared through SPEL expression.
+     *
+     * @param input the input
+     * @return the resolved expression value
+     */
     private Object handleDiscoveryOperation(String input) {
         if (input.startsWith("service")) {
             final String serviceName = getArgument("service", input);
@@ -63,11 +89,23 @@ public class DiscoveryPropertySource extends PropertySource<DiscoveryClient> {
         return null;
     }
 
+    /**
+     * Finds single service URI from the discovery service.
+     *
+     * @param serviceName the service name
+     * @return the service url, or {@code null} if no service has been found
+     */
     private URI findOne(String serviceName) {
         final ServiceInstance serviceInstance = findOneService(serviceName);
         return serviceInstance != null ? serviceInstance.getUri() : null;
     }
 
+    /**
+     * Expands the service URI.
+     *
+     * @param uri the input uri
+     * @return the result uri
+     */
     private URI expandUri(String uri) {
         try {
             final URI inputUri = URI.create(uri);
@@ -88,11 +126,24 @@ public class DiscoveryPropertySource extends PropertySource<DiscoveryClient> {
         }
     }
 
+    /**
+     * Retrieves single service instance.
+     *
+     * @param serviceName the service name
+     * @return the service instance
+     */
     private ServiceInstance findOneService(String serviceName) {
         final List<ServiceInstance> instances = getSource().getInstances(serviceName);
         return !instances.isEmpty() ? instances.get(0) : null;
     }
 
+    /**
+     * Matches the operation argument.
+     *
+     * @param operation the operation name
+     * @param input     the input string
+     * @return the argument value
+     */
     private String getArgument(String operation, String input) {
         final int index = operation.length() + 1;
         if (index >= input.length()) {
@@ -101,10 +152,23 @@ public class DiscoveryPropertySource extends PropertySource<DiscoveryClient> {
         return input.substring(index, input.length() - 1);
     }
 
+    /**
+     * Simple implementation that delegates to the {@link DiscoveryClient} registered in application context.
+     *
+     * @author Jakub Narloch
+     */
     private static class DelegatingDiscoveryClient implements DiscoveryClient {
 
+        /**
+         * The instance of {@link ApplicationContext}.
+         */
         private ApplicationContext applicationContext;
 
+        /**
+         * Sets the application context.
+         *
+         * @param applicationContext the applciation context
+         */
         public void setApplicationContext(ApplicationContext applicationContext) {
             this.applicationContext = applicationContext;
         }

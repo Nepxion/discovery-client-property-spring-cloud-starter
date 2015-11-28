@@ -37,6 +37,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
+ * Tests the registered service url expansion.
+ *
  * @author Jakub Narloch
  */
 @WebAppConfiguration
@@ -49,7 +51,7 @@ public class DiscoveryPropertyResolutionTest {
     private TestProperties properties;
 
     @Test
-    public void test() {
+    public void shouldExpandServiceUrl() {
 
         assertEquals("http://127.0.0.1:9300/", properties.getUrl());
     }
