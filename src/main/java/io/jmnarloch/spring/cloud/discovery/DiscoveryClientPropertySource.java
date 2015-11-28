@@ -28,7 +28,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 /**
- * Resolves a SpEL expressions for the ${discovery.*} operations.
+ * Resolves a SpEL expressions for the ${discoveryClient.*} operations.
  *
  * @author Jakub Narloch
  */
@@ -115,7 +115,6 @@ public class DiscoveryClientPropertySource extends PropertySource<DiscoveryClien
             if (serviceInstance == null) {
                 return null;
             }
-
             return new URI((serviceInstance.isSecure() ? "https" : "http"),
                     inputUri.getUserInfo(),
                     serviceInstance.getHost(),
@@ -124,6 +123,7 @@ public class DiscoveryClientPropertySource extends PropertySource<DiscoveryClien
                     inputUri.getQuery(),
                     inputUri.getFragment());
         } catch (URISyntaxException e) {
+            logger.error("Unexpected error occurred when expanding the property URI", e);
             throw new RuntimeException("Could not parse URI value: " + uri, e);
         }
     }
@@ -136,7 +136,11 @@ public class DiscoveryClientPropertySource extends PropertySource<DiscoveryClien
      */
     private ServiceInstance findOneService(String serviceName) {
         final List<ServiceInstance> instances = getSource().getInstances(serviceName);
-        return !instances.isEmpty() ? instances.get(0) : null;
+        if(instances.isEmpty()) {
+            logger.error("No service found matching name: {}", serviceName);
+            return null;
+        }
+        return instances.get((int) (Math.random() * instances.size()));
     }
 
     /**
