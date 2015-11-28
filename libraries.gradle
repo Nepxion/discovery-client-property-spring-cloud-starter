@@ -4,9 +4,10 @@ ext {
 
             springBootConfigurationProcessor: 'org.springframework.boot:spring-boot-configuration-processor:1.2.5.RELEASE',
             springBootWeb                   : 'org.springframework.boot:spring-boot-starter-web:1.2.5.RELEASE',
+            springBoot                      : 'org.springframework.boot:spring-boot-starter:1.2.5.RELEASE',
 
+            springCloudCommons              : 'org.springframework.cloud:spring-cloud-commons:1.0.3.RELEASE',
             springCloudEureka               : 'org.springframework.cloud:spring-cloud-starter-eureka:1.0.3.RELEASE',
-            springCloudEurekaServer         : 'org.springframework.cloud:spring-cloud-starter-eureka-server:1.0.3.RELEASE',
 
             springBootTest                  : 'org.springframework.boot:spring-boot-starter-test:1.2.5.RELEASE',
 
