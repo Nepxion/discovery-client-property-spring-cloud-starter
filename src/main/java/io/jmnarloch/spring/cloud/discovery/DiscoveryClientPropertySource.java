@@ -28,26 +28,28 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 /**
+ * Resolves a SpEL expressions for the ${discovery.*} operations.
+ *
  * @author Jakub Narloch
  */
-public class DiscoveryPropertySource extends PropertySource<DiscoveryClient> {
+public class DiscoveryClientPropertySource extends PropertySource<DiscoveryClient> {
 
     /**
      * Logger instance used by this class.
      */
-    private final Logger logger = LoggerFactory.getLogger(DiscoveryPropertySource.class);
+    private final Logger logger = LoggerFactory.getLogger(DiscoveryClientPropertySource.class);
 
     /**
-     * The default SPEL prefix.
+     * The default SpEL prefix.
      */
-    public static final String PREFIX = "discovery.";
+    public static final String PREFIX = "discoveryClient.";
 
     /**
-     * Creates new instance of {@link DiscoveryPropertySource} with specific name.
+     * Creates new instance of {@link DiscoveryClientPropertySource} with specific name.
      *
      * @param name the property source name
      */
-    public DiscoveryPropertySource(String name) {
+    public DiscoveryClientPropertySource(String name) {
         super(name, new DelegatingDiscoveryClient());
     }
 

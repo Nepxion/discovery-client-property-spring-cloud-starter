@@ -31,11 +31,12 @@ import org.springframework.core.env.StandardEnvironment;
 /**
  * An custom {@link ApplicationEvent} listener that plugs in into Spring Boot
  * {@link org.springframework.core.env.Environment} initialization phase and register custom
- * {@link DiscoveryPropertySource}.
+ * {@link DiscoveryClientPropertySource}.
  *
  * @author Jakub Narloch
+ * @see DiscoveryClientPropertySource
  */
-public class DiscoveryPropertySourceConfigurer implements ApplicationListener<ApplicationEvent>, Ordered {
+public class DiscoveryClientPropertySourceConfigurer implements ApplicationListener<ApplicationEvent>, Ordered {
 
     /**
      * {@inheritDoc}
@@ -65,7 +66,7 @@ public class DiscoveryPropertySourceConfigurer implements ApplicationListener<Ap
     protected void configurePropertySources(ConfigurableEnvironment environment) {
         environment.getPropertySources()
                 .addAfter(StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME,
-                        new DiscoveryPropertySource("discovery"));
+                        new DiscoveryClientPropertySource("discoveryClient"));
     }
 
     /**
@@ -78,7 +79,7 @@ public class DiscoveryPropertySourceConfigurer implements ApplicationListener<Ap
     }
 
     /**
-     * Initializes the {@link DiscoveryPropertySource} by injecting into them
+     * Initializes the {@link DiscoveryClientPropertySource} by injecting into them
      * {@link org.springframework.context.ApplicationContext}.
      *
      * @author Jakub Narloch
@@ -91,7 +92,7 @@ public class DiscoveryPropertySourceConfigurer implements ApplicationListener<Ap
         private ConfigurableApplicationContext applicationContext;
 
         /**
-         * Creates new instance of {@link DiscoveryPropertySourceConfigurer}.
+         * Creates new instance of {@link DiscoveryClientPropertySourceConfigurer}.
          *
          * @param applicationContext the application context
          */
@@ -116,14 +117,14 @@ public class DiscoveryPropertySourceConfigurer implements ApplicationListener<Ap
         }
 
         /**
-         * Initializes the {@link DiscoveryPropertySource}.
+         * Initializes the {@link DiscoveryClientPropertySource}.
          *
          * @param environment the environment
          */
         protected void initialize(ConfigurableEnvironment environment) {
             for (PropertySource<?> propertySource : environment.getPropertySources()) {
-                if (propertySource instanceof DiscoveryPropertySource) {
-                    ((DiscoveryPropertySource) propertySource).setApplicationContext(applicationContext);
+                if (propertySource instanceof DiscoveryClientPropertySource) {
+                    ((DiscoveryClientPropertySource) propertySource).setApplicationContext(applicationContext);
                 }
             }
         }

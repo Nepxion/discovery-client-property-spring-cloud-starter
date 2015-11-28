@@ -1,2 +1,2 @@
 org.springframework.context.ApplicationListener=\
-io.jmnarloch.spring.cloud.discovery.DiscoveryPropertySourceConfigurer
+io.jmnarloch.spring.cloud.discovery.DiscoveryClientPropertySourceConfigurer

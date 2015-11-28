@@ -43,9 +43,9 @@ import static org.mockito.Mockito.when;
  */
 @WebAppConfiguration
 @IntegrationTest
-@SpringApplicationConfiguration(classes = {DiscoveryPropertyResolutionTest.Application.class})
+@SpringApplicationConfiguration(classes = {DiscoveryClientPropertyResolutionTest.Application.class})
 @RunWith(SpringJUnit4ClassRunner.class)
-public class DiscoveryPropertyResolutionTest {
+public class DiscoveryClientPropertyResolutionTest {
 
     @Autowired
     private TestProperties properties;

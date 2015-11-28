@@ -26,7 +26,7 @@ apply plugin: 'com.github.kt3k.coveralls'
 sourceCompatibility = 1.7
 
 group = "io.jmnarloch"
-archivesBaseName="discovery-configuration-property-spring-cloud-starter"
+archivesBaseName="discovery-client-property-spring-cloud-starter"
 
 ext {
     isReleaseVersion = !version.endsWith("SNAPSHOT")
@@ -38,7 +38,7 @@ task wrapper(type: Wrapper) {
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'discovery-configuration-property-spring-cloud-starter',
+        attributes 'Implementation-Title': 'discovery-client-property-spring-cloud-starter',
                    'Implementation-Version': version
     }
 }

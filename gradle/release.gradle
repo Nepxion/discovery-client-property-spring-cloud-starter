@@ -35,15 +35,15 @@ uploadArchives {
             }
 
             pom.project {
-                name 'discovery-configuration-property-spring-cloud-starter'
+                name 'discovery-client-property-spring-cloud-starter'
                 packaging 'jar'
                 description 'Spring Cloud Configuration Property Editor'
-                url 'https://github.com/jmnarloch/discovery-configuration-property-spring-cloud-starter'
+                url 'https://github.com/jmnarloch/discovery-client-property-spring-cloud-starter'
 
                 scm {
-                    connection 'scm:git:https://github.com/jmnarloch/discovery-configuration-property-spring-cloud-starter.git'
-                    developerConnection 'scm:git:https://github.com/jmnarloch/discovery-configuration-property-spring-cloud-starter.git'
-                    url 'https://github.com/jmnarloch/discovery-configuration-property-spring-cloud-starter.git'
+                    connection 'scm:git:https://github.com/jmnarloch/discovery-client-property-spring-cloud-starter.git'
+                    developerConnection 'scm:git:https://github.com/jmnarloch/discovery-client-property-spring-cloud-starter.git'
+                    url 'https://github.com/jmnarloch/discovery-client-property-spring-cloud-starter.git'
                 }
 
                 licenses {

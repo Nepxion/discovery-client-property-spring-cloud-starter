@@ -18,6 +18,7 @@ package io.jmnarloch.spring.cloud;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
+ * Test configuration properties.
  *
  * @author Jakub Narloch
  */
