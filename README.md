@@ -40,7 +40,7 @@ Currently supported operations:
 * url - expands the url replacing the host name and port with discovered service values, any additional information
 passed as the argument like the user login, path and query params will remain intact.
 
-Notices that the property will resolve only once during the application startup.
+Notices that the property will be resolve only once during the application startup.
 
 Currently this extension is most useful with [Consul](http://cloud.spring.io/spring-cloud-consul/) which allows you
 to register any arbitrary service.
