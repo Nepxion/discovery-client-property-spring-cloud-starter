@@ -53,8 +53,7 @@ compileJava {
 
 dependencies {
 
-    compile (libraries.springCloudEureka)
-    compile (libraries.springCloudRibbon)
+    compile (libraries.springCloudEureka    )
     compile (libraries.springBootConfigurationProcessor) {
         ext.optional = true
     }

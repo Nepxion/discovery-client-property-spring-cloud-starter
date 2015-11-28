@@ -1,0 +1,3 @@
+test:
+  host:
+    url: "${discovery.url(http://elasticsearch/)}"
